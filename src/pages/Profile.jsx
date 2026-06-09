@@ -51,21 +51,16 @@ export default function Profile() {
       {/* Dashboard Banner */}
       <motion.div 
         initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }}
-        style={{ 
-          background: 'linear-gradient(135deg, var(--primary) 0%, #ea580c 100%)', 
-          borderRadius: 'var(--radius-lg)', padding: '60px 40px', color: 'white',
-          marginBottom: '60px', display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-          boxShadow: '0 20px 25px -5px rgba(249, 115, 22, 0.3)'
-        }}
+        className="dashboard-banner"
       >
         <div>
-          <h1 style={{ fontSize: '3.5rem', marginBottom: '10px' }}>My Dashboard</h1>
+          <h1 style={{ fontSize: 'var(--title-md)', marginBottom: '10px' }}>My Dashboard</h1>
           <p style={{ fontSize: '1.2rem', opacity: 0.9 }}>Manage your pets, track vaccinations, and store medical records safely.</p>
         </div>
         <ShieldCheck size={100} opacity={0.2} />
       </motion.div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.5fr', gap: '60px' }}>
+      <div className="profile-grid">
         
         {/* Left Column: Add Pet & Pet List */}
         <div>
@@ -114,7 +109,7 @@ export default function Profile() {
             
             <div style={{ background: 'var(--bg-color)', padding: '30px', borderRadius: 'var(--radius-md)', marginBottom: '40px', border: '1px dashed var(--border)' }}>
               <h3 style={{ fontSize: '1.2rem', marginBottom: '20px' }}>Upload New Document</h3>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+              <div className="doc-upload-grid">
                 <div>
                   <label style={{ display: 'block', marginBottom: '8px', fontWeight: 500 }}>Select Pet</label>
                   <select className="form-control" value={selectedPetForDoc} onChange={e => setSelectedPetForDoc(e.target.value)}>

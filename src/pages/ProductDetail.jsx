@@ -25,7 +25,7 @@ export default function ProductDetail() {
         <ArrowLeft size={18} /> Back to Store
       </Link>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '60px', alignItems: 'start' }}>
+      <div className="product-detail-grid">
         {/* Product Image */}
         <motion.div 
           initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}
@@ -36,7 +36,7 @@ export default function ProductDetail() {
 
         {/* Product Info */}
         <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }}>
-          <h1 style={{ fontSize: '2.5rem', marginBottom: '10px' }}>{product.name}</h1>
+          <h1 style={{ fontSize: 'var(--title-xs)', marginBottom: '10px' }}>{product.name}</h1>
           
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '20px' }}>
             <div style={{ display: 'flex', color: '#FACC15' }}>
@@ -45,7 +45,7 @@ export default function ProductDetail() {
             <span className="text-muted">({averageRating} from {product.reviews.length} reviews)</span>
           </div>
 
-          <div style={{ fontSize: '2.5rem', fontWeight: 700, color: 'var(--primary)', marginBottom: '24px' }}>
+          <div style={{ fontSize: 'var(--title-xs)', fontWeight: 700, color: 'var(--primary)', marginBottom: '24px' }}>
             ${product.price.toFixed(2)}
           </div>
 
@@ -76,7 +76,7 @@ export default function ProductDetail() {
       {/* Reviews Section */}
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} style={{ marginTop: '80px' }}>
         <h2 style={{ marginBottom: '30px' }}>Customer Reviews</h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '20px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: '20px' }}>
           {product.reviews.map(rev => (
             <div key={rev.id} style={{ background: 'var(--surface)', padding: '24px', borderRadius: 'var(--radius-md)', border: '1px solid var(--border)' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>

@@ -31,7 +31,7 @@ export default function Services() {
   return (
     <div className="container" style={{ padding: '60px 0' }}>
       <div style={{ textAlign: 'center', marginBottom: '50px' }}>
-        <h1 style={{ fontSize: '3.5rem', marginBottom: '15px' }}>Pet Services Directory</h1>
+        <h1 style={{ fontSize: 'var(--title-md)', marginBottom: '15px' }}>Pet Services Directory</h1>
         <p className="text-muted" style={{ fontSize: '1.2rem', maxWidth: '700px', margin: '0 auto' }}>
           Connect with top-rated veterinarians, groomers, dog walkers, and pet nannies in your area. Your pet deserves the best care!
         </p>

@@ -17,10 +17,10 @@ export default function Store() {
   return (
     <div className="container" style={{ padding: '60px 0' }}>
       <div style={{ textAlign: 'center', marginBottom: '40px' }}>
-        <h1 style={{ fontSize: '3rem', marginBottom: '16px' }}>Premium Pet Store</h1>
+        <h1 style={{ fontSize: 'var(--title-sm)', marginBottom: '16px' }}>Premium Pet Store</h1>
         
         {/* Species Toggle */}
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', marginBottom: '30px' }}>
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', marginBottom: '30px', flexWrap: 'wrap' }}>
           <button 
             className={`btn ${species === 'dogs' ? 'btn-primary' : 'btn-outline'}`}
             onClick={() => { setSpecies('dogs'); setSubCategory('all'); }}
@@ -36,7 +36,7 @@ export default function Store() {
         </div>
 
         {/* Subcategory Filters */}
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '15px' }}>
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '15px', flexWrap: 'wrap' }}>
           {['all', 'food', 'toys'].map(sub => (
             <span 
               key={sub}
@@ -56,7 +56,7 @@ export default function Store() {
         </div>
       </div>
 
-      <motion.div layout className="products-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '30px' }}>
+      <motion.div layout className="products-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 280px), 1fr))', gap: '30px' }}>
         <AnimatePresence>
           {filteredProducts.map(prod => (
             <motion.div 

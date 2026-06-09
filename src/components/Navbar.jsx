@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { ShoppingCart, User, Dog } from 'lucide-react';
+import { ShoppingCart, User, Dog, Menu } from 'lucide-react';
 import { useAppContext } from '../context/AppContext';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -8,29 +8,29 @@ export default function Navbar({ onOpenCart }) {
   const { cartItemsCount } = useAppContext();
   const location = useLocation();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const isActive = (path) => location.pathname === path;
 
   return (
-    <header style={{
-      position: 'sticky', top: 0, zIndex: 50, 
-      backgroundColor: 'rgba(255, 255, 255, 0.9)', backdropFilter: 'blur(12px)',
-      borderBottom: '1px solid var(--border)', padding: '16px 0'
-    }}>
-      <div className="container nav-container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <Link to="/" className="logo" style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '1.75rem', fontWeight: 700, color: 'var(--text-main)' }}>
-          <Dog size={32} color="var(--primary)" /> Tiny Paws
+    <header>
+      <div className="container nav-container">
+        <Link to="/" className="logo">
+          <Dog size={32} color="var(--primary)" style={{ flexShrink: 0 }} /> Tiny Paws
         </Link>
-        <nav className="nav-links" style={{ display: 'flex', gap: '40px', fontSize: '1.1rem' }}>
+
+        {/* Desktop Navigation Links */}
+        <nav className="nav-links" style={{ fontSize: '1.1rem' }}>
           <Link to="/" style={{ color: isActive('/') ? 'var(--primary)' : 'inherit', fontWeight: 500 }}>Home</Link>
           <Link to="/store" style={{ color: isActive('/store') ? 'var(--primary)' : 'inherit', fontWeight: 500 }}>Store</Link>
           <Link to="/services" style={{ color: isActive('/services') ? 'var(--primary)' : 'inherit', fontWeight: 500 }}>Services</Link>
           <Link to="/contact" style={{ color: isActive('/contact') ? 'var(--primary)' : 'inherit', fontWeight: 500 }}>Contact</Link>
         </nav>
-        <div className="nav-icons" style={{ display: 'flex', gap: '24px', alignItems: 'center', position: 'relative' }}>
-          
+
+        <div className="nav-icons" style={{ position: 'relative' }}>
+
           {/* User Dropdown */}
-          <div 
+          <div
             style={{ position: 'relative', cursor: 'pointer' }}
             onMouseEnter={() => setIsDropdownOpen(true)}
             onMouseLeave={() => setIsDropdownOpen(false)}
@@ -38,7 +38,7 @@ export default function Navbar({ onOpenCart }) {
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '8px', color: 'var(--text-main)' }}>
               <User size={24} />
             </div>
-            
+
             <AnimatePresence>
               {isDropdownOpen && (
                 <motion.div
@@ -67,7 +67,7 @@ export default function Navbar({ onOpenCart }) {
           <div onClick={onOpenCart} className="cart-icon" style={{ position: 'relative', cursor: 'pointer', padding: '8px' }}>
             <ShoppingCart size={24} />
             {cartItemsCount > 0 && (
-              <motion.span 
+              <motion.span
                 initial={{ scale: 0 }} animate={{ scale: 1 }}
                 className="cart-count" style={{
                   position: 'absolute', top: 0, right: 0, background: 'var(--primary)', color: 'white',
@@ -79,11 +79,54 @@ export default function Navbar({ onOpenCart }) {
               </motion.span>
             )}
           </div>
+
+          {/* Hamburger Menu Button (mobile only) */}
+          <div onClick={() => setIsMenuOpen(!isMenuOpen)} className="hamburger-menu" style={{ cursor: 'pointer', padding: '8px' }}>
+            <Menu size={24} color="var(--text-main)" />
+          </div>
         </div>
       </div>
-      <style>{`
-        .dropdown-link:hover { background-color: var(--bg-color); }
-      `}</style>
+
+      {/* Mobile Menu */}
+      <motion.div
+        className="mobile-menu"
+        initial={{ opacity: 0, y: -20 }}
+        animate={isMenuOpen ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
+        exit={{ opacity: 0, y: -20 }}
+        transition={{ duration: 0.3 }}
+        style={{
+          display: isMenuOpen ? 'block' : 'none',
+          position: 'absolute',
+          top: '100%',
+          left: 0,
+          right: 0,
+          background: 'var(--surface)',
+          borderTop: '1px solid var(--border)',
+          padding: '20px',
+          zIndex: 100
+        }}
+      >
+        <nav style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          <Link to="/" style={{ color: isActive('/') ? 'var(--primary)' : 'var(--text-main)', fontWeight: 500, textDecoration: 'none' }} onClick={() => setIsMenuOpen(false)}>
+            Home
+          </Link>
+          <Link to="/store" style={{ color: isActive('/store') ? 'var(--primary)' : 'var(--text-main)', fontWeight: 500, textDecoration: 'none' }} onClick={() => setIsMenuOpen(false)}>
+            Store
+          </Link>
+          <Link to="/services" style={{ color: isActive('/services') ? 'var(--primary)' : 'var(--text-main)', fontWeight: 500, textDecoration: 'none' }} onClick={() => setIsMenuOpen(false)}>
+            Services
+          </Link>
+          <Link to="/contact" style={{ color: isActive('/contact') ? 'var(--primary)' : 'var(--text-main)', fontWeight: 500, textDecoration: 'none' }} onClick={() => setIsMenuOpen(false)}>
+            Contact
+          </Link>
+          <Link to="/profile" style={{ color: isActive('/profile') ? 'var(--primary)' : 'var(--text-main)', fontWeight: 500, textDecoration: 'none', borderTop: '1px solid var(--border)', paddingTop: '16px' }} onClick={() => setIsMenuOpen(false)}>
+            My Profile
+          </Link>
+          <Link to="/signin" style={{ color: isActive('/signin') ? 'var(--primary)' : 'var(--text-main)', fontWeight: 500, textDecoration: 'none' }} onClick={() => setIsMenuOpen(false)}>
+            Sign In / Sign Up
+          </Link>
+        </nav>
+      </motion.div>
     </header>
   );
 }

@@ -11,13 +11,13 @@ export default function Contact() {
   return (
     <div className="container" style={{ padding: '60px 0' }}>
       <div style={{ textAlign: 'center', marginBottom: '60px' }}>
-        <h1 style={{ fontSize: '3rem', marginBottom: '16px' }}>Get in Touch</h1>
+        <h1 style={{ fontSize: 'var(--title-sm)', marginBottom: '16px' }}>Get in Touch</h1>
         <p className="text-muted" style={{ fontSize: '1.1rem', maxWidth: '600px', margin: '0 auto' }}>
           Have questions about your pet's health, our products, or want to schedule an appointment? We're here to help!
         </p>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '60px' }}>
+      <div className="contact-grid">
         {/* Contact Info */}
         <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}>
           <h2 style={{ marginBottom: '30px' }}>Contact Information</h2>
@@ -57,10 +57,10 @@ export default function Contact() {
         {/* Contact Form */}
         <motion.div 
           initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }}
-          style={{ background: 'var(--surface)', padding: '40px', borderRadius: 'var(--radius-lg)', boxShadow: 'var(--shadow-md)', border: '1px solid var(--border)' }}
+          className="contact-form-card"
         >
           <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+            <div className="contact-form-grid">
               <div>
                 <label style={{ display: 'block', marginBottom: '8px', fontWeight: 500 }}>First Name</label>
                 <input type="text" className="form-control" required />

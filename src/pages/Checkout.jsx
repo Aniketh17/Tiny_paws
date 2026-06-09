@@ -59,16 +59,16 @@ export default function Checkout() {
   }
 
   return (
-    <div className="container" style={{ padding: '60px 0', position: 'relative' }}>
+    <div className="container checkout-container">
       <button onClick={() => navigate(-1)} style={{ background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', fontSize: '1.1rem', fontWeight: 600, marginBottom: '30px' }}>
         <ArrowLeft size={24} /> Back to Store
       </button>
 
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '60px' }}>
+      <div className="checkout-flex-layout">
         
         {/* Left Column: Forms */}
-        <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} style={{ flex: '1 1 500px' }}>
-          <div style={{ background: 'var(--surface)', padding: '40px', borderRadius: 'var(--radius-lg)', border: '1px solid var(--border)', boxShadow: 'var(--shadow-sm)' }}>
+        <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} style={{ flex: '1 1 300px' }}>
+          <div className="contact-form-card">
             
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '30px', borderBottom: '2px solid var(--bg-color)', paddingBottom: '20px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '10px', color: step === 1 ? 'var(--primary)' : 'var(--text-muted)' }}>
@@ -83,12 +83,12 @@ export default function Checkout() {
 
             {step === 1 ? (
               <form onSubmit={(e) => { e.preventDefault(); setStep(2); }}>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', marginBottom: '20px' }}>
+                <div className="contact-form-grid" style={{ marginBottom: '20px' }}>
                   <div><label style={{ display: 'block', marginBottom: '8px', fontWeight: 500 }}>First Name</label><input type="text" className="form-control" required /></div>
                   <div><label style={{ display: 'block', marginBottom: '8px', fontWeight: 500 }}>Last Name</label><input type="text" className="form-control" required /></div>
                 </div>
                 <div style={{ marginBottom: '20px' }}><label style={{ display: 'block', marginBottom: '8px', fontWeight: 500 }}>Address</label><input type="text" className="form-control" required /></div>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', marginBottom: '30px' }}>
+                <div className="contact-form-grid" style={{ marginBottom: '30px' }}>
                   <div><label style={{ display: 'block', marginBottom: '8px', fontWeight: 500 }}>City</label><input type="text" className="form-control" required /></div>
                   <div><label style={{ display: 'block', marginBottom: '8px', fontWeight: 500 }}>ZIP Code</label><input type="text" className="form-control" required /></div>
                 </div>
@@ -108,7 +108,7 @@ export default function Checkout() {
                 </div>
                 
                 <div style={{ marginBottom: '20px' }}><label style={{ display: 'block', marginBottom: '8px', fontWeight: 500 }}>Card Number</label><input type="text" placeholder="0000 0000 0000 0000" className="form-control" required /></div>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', marginBottom: '30px' }}>
+                <div className="contact-form-grid" style={{ marginBottom: '30px' }}>
                   <div><label style={{ display: 'block', marginBottom: '8px', fontWeight: 500 }}>Expiry Date</label><input type="text" placeholder="MM/YY" className="form-control" required /></div>
                   <div><label style={{ display: 'block', marginBottom: '8px', fontWeight: 500 }}>CVC</label><input type="text" placeholder="123" className="form-control" required /></div>
                 </div>
@@ -125,8 +125,8 @@ export default function Checkout() {
         </motion.div>
 
         {/* Right Column: Order Summary */}
-        <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} style={{ flex: '1 1 350px' }}>
-          <div style={{ background: 'var(--surface)', padding: '40px', borderRadius: 'var(--radius-lg)', border: '1px solid var(--border)', boxShadow: 'var(--shadow-sm)' }}>
+        <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} style={{ flex: '1 1 300px' }}>
+          <div className="contact-form-card">
             <h2 style={{ marginBottom: '30px', fontSize: '1.8rem' }}>Order Summary</h2>
             
             <div style={{ display: 'flex', flexDirection: 'column', gap: '15px', marginBottom: '30px', maxHeight: '300px', overflowY: 'auto' }}>

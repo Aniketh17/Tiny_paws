@@ -48,11 +48,11 @@ export default function Home() {
   return (
     <div className="home">
       {/* Hero Section */}
-      <section className="container" style={{ display: 'flex', alignItems: 'center', padding: '80px 0', minHeight: 'calc(100vh - 80px)' }}>
-        <div style={{ flex: 1, paddingRight: '40px' }}>
+      <section className="container hero-section" style={{ minHeight: 'calc(100vh - 80px)' }}>
+        <div className="hero-content">
           <motion.h1 
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-            style={{ fontSize: '4rem', marginBottom: '20px' }}
+            style={{ fontSize: 'var(--title-lg)', marginBottom: '20px' }}
           >
             Premium Care for Your <span style={{ color: 'var(--primary)' }}>Furry Friends</span>
           </motion.h1>
@@ -62,14 +62,14 @@ export default function Home() {
           >
             Your one-stop destination for high-quality pet supplies, expert veterinary services, dog walkers, and medical document management.
           </motion.p>
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }} style={{ display: 'flex', gap: '16px' }}>
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }} className="hero-buttons">
             <Link to="/store" className="btn btn-primary">Shop Now</Link>
             <Link to="/services" className="btn btn-outline">Explore Services</Link>
           </motion.div>
         </div>
         <motion.div 
           initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.2 }}
-          style={{ flex: 1 }}
+          className="hero-image"
         >
           <img src="images/hero_dog_1780981561460.png" alt="Happy dog" style={{ width: '100%', borderRadius: 'var(--radius-lg)', boxShadow: 'var(--shadow-md)', objectFit: 'cover', aspectRatio: '4/3' }} />
         </motion.div>
@@ -79,15 +79,15 @@ export default function Home() {
       <section className="container">
         <motion.div 
           initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-          style={{ margin: '60px 0', background: 'linear-gradient(135deg, rgba(249, 115, 22, 0.1), rgba(249, 115, 22, 0.05))', borderRadius: 'var(--radius-lg)', padding: '60px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', border: '1px solid rgba(249, 115, 22, 0.2)' }}
+          className="vax-banner"
         >
           <div>
-            <h2 style={{ fontSize: '2.5rem', marginBottom: '10px' }}>Vaccination Due Reminder</h2>
+            <h2 style={{ fontSize: 'var(--title-xs)', marginBottom: '10px' }}>Vaccination Due Reminder</h2>
             <p className="text-muted" style={{ fontSize: '1.1rem' }}>Keep your pets safe. We check all your pet profiles for upcoming dates.</p>
           </div>
-          <div style={{ background: 'var(--surface)', padding: '20px 40px', borderRadius: 'var(--radius-md)', boxShadow: 'var(--shadow-sm)', textAlign: 'center' }}>
+          <div style={{ background: 'var(--surface)', padding: '20px 40px', borderRadius: 'var(--radius-md)', boxShadow: 'var(--shadow-sm)', textAlign: 'center', width: '100%', maxWidth: '320px' }}>
             <div className="text-muted" style={{ marginBottom: '10px' }}>Next Vaccine In:</div>
-            <div style={{ fontSize: '2.5rem', fontFamily: 'Outfit', fontWeight: 700, color: 'var(--primary)', fontVariantNumeric: 'tabular-nums' }}>
+            <div style={{ fontSize: 'var(--title-xs)', fontFamily: 'Outfit', fontWeight: 700, color: 'var(--primary)', fontVariantNumeric: 'tabular-nums' }}>
               {timeLeft}
             </div>
           </div>
@@ -102,7 +102,7 @@ export default function Home() {
             <p className="text-muted" style={{ maxWidth: '600px', margin: '0 auto' }}>We combine premium e-commerce with real-world professional pet services.</p>
           </div>
           
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '30px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 250px), 1fr))', gap: '30px' }}>
             {[
               { icon: <ShieldCheck size={40} />, title: "Trusted Professionals", desc: "All our groomers, walkers, and vets are fully verified." },
               { icon: <Heart size={40} />, title: "Premium Products", desc: "We only stock high-quality, nutritious food and safe toys." },
@@ -122,7 +122,7 @@ export default function Home() {
       {/* Services Preview Section */}
       <section style={{ padding: '80px 0' }}>
         <div className="container">
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '40px' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '40px', flexWrap: 'wrap', gap: '15px' }}>
             <div>
               <h2 style={{ fontSize: '2.5rem', marginBottom: '10px' }}>Our Services</h2>
               <p className="text-muted">Connecting you with the best pet professionals.</p>
@@ -132,7 +132,7 @@ export default function Home() {
             </Link>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '30px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 250px), 1fr))', gap: '30px' }}>
             {[
               { title: 'Dog Walkers', icon: <Briefcase size={32} />, link: '/services' },
               { title: 'Pet Nannies', icon: <Heart size={32} />, link: '/services' },
@@ -156,7 +156,7 @@ export default function Home() {
       <section style={{ padding: '80px 0', background: 'var(--surface)', borderTop: '1px solid var(--border)' }}>
         <div className="container">
           <h2 style={{ fontSize: '2.5rem', marginBottom: '40px', textAlign: 'center' }}>Nearby Partner Clinics & Stores</h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '30px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: '30px' }}>
             {[
               { name: 'City Vet Clinic', dist: '1.2 miles', address: '123 Main St', link: 'https://maps.google.com/?q=City+Vet+Clinic+123+Main+St' },
               { name: 'Paws & Claws Care', dist: '3.5 miles', address: '456 Oak Ave', link: 'https://maps.google.com/?q=Paws+Claws+Care+456+Oak+Ave' },
@@ -179,7 +179,7 @@ export default function Home() {
       <section style={{ padding: '80px 0' }}>
         <div className="container">
           <h2 style={{ fontSize: '2.5rem', marginBottom: '50px', textAlign: 'center' }}>What Pet Parents Say</h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '30px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: '30px' }}>
             {[
               { name: "Emily R.", review: "The Document Vault feature is a lifesaver. I always have my dog's vaccination records ready when we travel!", rating: 5 },
               { name: "Mark T.", review: "Found the best dog walker through their Services directory. Plus, their premium dog food delivery is super fast.", rating: 5 },
