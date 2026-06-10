@@ -1,101 +1,212 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, Filter, ShoppingCart } from 'lucide-react';
-import { products } from '../data/products';
 import { useAppContext } from '../context/AppContext';
+import { products } from '../data/products';
+
+const categories = ['dogs', 'cats'];
+const subFilters = [
+  { key: 'all', label: 'All' },
+  { key: 'nutrition', label: 'Nutrition' },
+  { key: 'toys', label: 'Toys' },
+  { key: 'health', label: 'Health' },
+  { key: 'grooming', label: 'Grooming' },
+];
 
 export default function Store() {
-  const { addToCart } = useAppContext();
-  const [species, setSpecies] = useState('dogs'); // 'dogs' or 'cats'
-  const [subCategory, setSubCategory] = useState('all'); // 'all', 'food', 'toys'
+  const { addToCart, updateCartQuantity } = useAppContext();
+  const [activeSpecies, setActiveSpecies] = useState('dogs');
+  const [activeSub, setActiveSub] = useState('all');
+  const [addingId, setAddingId] = useState(null);
 
-  const filteredProducts = products.filter(p => {
-    return p.category === species && (subCategory === 'all' || p.subCategory === subCategory);
+  const filteredProducts = products.filter((prod) => {
+    const speciesMatch = prod.category === activeSpecies;
+    const subMatch = activeSub === 'all' || prod.subCategory === activeSub;
+    return speciesMatch && subMatch;
   });
 
+  const handleAddToCart = (e, prod) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setAddingId(prod.id);
+    addToCart(prod, 1);
+    setTimeout(() => {
+      setAddingId(null);
+    }, 1200);
+  };
+
   return (
-    <div className="container" style={{ padding: '60px 0' }}>
-      <div style={{ textAlign: 'center', marginBottom: '40px' }}>
-        <h1 style={{ fontSize: 'var(--title-sm)', marginBottom: '16px' }}>Premium Pet Store</h1>
-        
-        {/* Species Toggle */}
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', marginBottom: '30px', flexWrap: 'wrap' }}>
-          <button 
-            className={`btn ${species === 'dogs' ? 'btn-primary' : 'btn-outline'}`}
-            onClick={() => { setSpecies('dogs'); setSubCategory('all'); }}
+    <main className="max-w-container-max mx-auto px-gutter py-stack-lg" style={{ paddingTop: '120px' }}>
+      {/* Back to Home Button */}
+      <div style={{ display: 'flex', justifyContent: 'flex-start', marginBottom: '24px' }}>
+        <Link to="/" className="font-label-md text-on-surface-variant hover:text-primary" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>arrow_back</span>
+          Back to Home
+        </Link>
+      </div>
+
+      {/* Header Section */}
+      <div className="store-header text-center mb-stack-lg" style={{ textAlign: 'center', marginBottom: 'var(--stack-lg)' }}>
+        <h1 className="font-display-lg text-display-lg text-primary mb-4" style={{ margin: '0 0 16px 0' }}>
+          The Premium Pet Store
+        </h1>
+        <p className="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto" style={{ margin: '0 auto', maxWidth: '42rem' }}>
+          Elevating the lives of your companions with curated essentials designed for comfort, health, and joy.
+        </p>
+      </div>
+
+      {/* Species Toggle */}
+      <div className="flex justify-center mb-stack-md" style={{ display: 'flex', justifyContent: 'center', marginBottom: 'var(--stack-md)' }}>
+        <div
+          className="bg-surface-container-low p-1.5 rounded-full flex items-center shadow-inner border border-outline-variant/30"
+          style={{
+            backgroundColor: 'var(--surface-container-low)',
+            padding: '6px',
+            borderRadius: 'var(--radius-full)',
+            display: 'inline-flex',
+            alignItems: 'center',
+            border: '1px solid rgba(112, 121, 119, 0.2)',
+          }}
+        >
+          <button
+            className={`px-8 py-2.5 rounded-full font-label-md text-label-md transition-all gentle-spring ${
+              activeSpecies === 'dogs'
+                ? 'bg-primary text-on-primary shadow-lg'
+                : 'text-on-surface-variant hover:bg-surface-container-high'
+            }`}
+            onClick={() => {
+              setActiveSpecies('dogs');
+              setActiveSub('all');
+            }}
+            style={{
+              padding: '10px 32px',
+              borderRadius: 'var(--radius-full)',
+              backgroundColor: activeSpecies === 'dogs' ? 'var(--primary)' : 'transparent',
+              color: activeSpecies === 'dogs' ? 'var(--on-primary)' : 'var(--on-surface-variant)',
+            }}
           >
             Dogs
           </button>
-          <button 
-            className={`btn ${species === 'cats' ? 'btn-primary' : 'btn-outline'}`}
-            onClick={() => { setSpecies('cats'); setSubCategory('all'); }}
+          <button
+            className={`px-8 py-2.5 rounded-full font-label-md text-label-md transition-all gentle-spring ${
+              activeSpecies === 'cats'
+                ? 'bg-primary text-on-primary shadow-lg'
+                : 'text-on-surface-variant hover:bg-surface-container-high'
+            }`}
+            onClick={() => {
+              setActiveSpecies('cats');
+              setActiveSub('all');
+            }}
+            style={{
+              padding: '10px 32px',
+              borderRadius: 'var(--radius-full)',
+              backgroundColor: activeSpecies === 'cats' ? 'var(--primary)' : 'transparent',
+              color: activeSpecies === 'cats' ? 'var(--on-primary)' : 'var(--on-surface-variant)',
+            }}
           >
             Cats
           </button>
         </div>
-
-        {/* Subcategory Filters */}
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '15px', flexWrap: 'wrap' }}>
-          {['all', 'food', 'toys'].map(sub => (
-            <span 
-              key={sub}
-              onClick={() => setSubCategory(sub)}
-              style={{ 
-                cursor: 'pointer', 
-                textTransform: 'capitalize', 
-                fontWeight: subCategory === sub ? 700 : 400,
-                color: subCategory === sub ? 'var(--primary)' : 'var(--text-muted)',
-                borderBottom: subCategory === sub ? '2px solid var(--primary)' : 'none',
-                paddingBottom: '4px'
-              }}
-            >
-              {sub}
-            </span>
-          ))}
-        </div>
       </div>
 
-      <motion.div layout className="products-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 280px), 1fr))', gap: '30px' }}>
-        <AnimatePresence>
-          {filteredProducts.map(prod => (
-            <motion.div 
+      {/* Subcategory Tabs */}
+      <div className="flex justify-center flex-wrap gap-4 mb-stack-lg" style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '16px', marginBottom: 'var(--stack-lg)' }}>
+        {subFilters.map((tab) => (
+          <button
+            key={tab.key}
+            onClick={() => setActiveSub(tab.key)}
+            className={`px-6 py-2 rounded-full border font-label-md text-label-md transition-all ${
+              activeSub === tab.key
+                ? 'border-primary bg-primary text-on-primary'
+                : 'border-outline-variant text-on-surface-variant hover:border-primary hover:text-primary'
+            }`}
+            style={{
+              padding: '8px 24px',
+              borderRadius: 'var(--radius-full)',
+              border: '1px solid',
+              borderColor: activeSub === tab.key ? 'var(--primary)' : 'var(--outline-variant)',
+              backgroundColor: activeSub === tab.key ? 'var(--primary)' : 'transparent',
+              color: activeSub === tab.key ? 'var(--on-primary)' : 'var(--on-surface-variant)',
+            }}
+          >
+            {tab.label}
+          </button>
+        ))}
+      </div>
+
+      <div className="products-grid">
+        <AnimatePresence mode="popLayout">
+          {filteredProducts.map((prod) => (
+            <motion.div
               key={prod.id}
+              className="product-card"
               layout
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.9 }}
-              whileHover={{ y: -8, boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)' }}
-              transition={{ duration: 0.2 }}
-              style={{ background: 'var(--surface)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--border)', overflow: 'hidden', display: 'flex', flexDirection: 'column', cursor: 'pointer' }}
+              transition={{ duration: 0.3 }}
             >
-              <Link to={`/product/${prod.id}`}>
-                <img src={prod.image} alt={prod.name} style={{ width: '100%', height: '250px', objectFit: 'cover', borderBottom: '1px solid var(--border)' }} />
+              <Link to={`/product/${prod.id}`} className="product-img-wrap">
+                <img
+                  className="product-img"
+                  alt={prod.name}
+                  src={prod.image}
+                />
+                {prod.tag && (
+                  <span className="product-badge">
+                    {prod.tag}
+                  </span>
+                )}
               </Link>
-              <div style={{ padding: '30px', display: 'flex', flexDirection: 'column', flex: 1 }}>
-                <Link to={`/product/${prod.id}`} style={{ fontSize: '1.4rem', fontWeight: 700, marginBottom: '10px', fontFamily: 'Outfit' }}>
-                  {prod.name}
+              <div className="product-body">
+                <p className="product-meta">
+                  {prod.subCategory}
+                </p>
+                <Link to={`/product/${prod.id}`}>
+                  <h3 className="product-name">
+                    {prod.name}
+                  </h3>
                 </Link>
-                <div style={{ color: 'var(--primary)', fontSize: '1.8rem', fontWeight: 800, marginBottom: '24px' }}>
-                  ${prod.price.toFixed(2)}
+                <div className="product-footer">
+                  <span className="product-price">
+                    ${prod.price.toFixed(2)}
+                  </span>
+                  <motion.button
+                    className="bg-secondary-container text-on-secondary-container p-2 rounded-lg hover:bg-primary hover:text-on-primary transition-colors gentle-spring"
+                    onClick={(e) => handleAddToCart(e, prod)}
+                    whileTap={{ scale: 0.9 }}
+                    animate={addingId === prod.id ? {
+                      backgroundColor: 'var(--primary)',
+                      color: 'var(--on-primary)',
+                      scale: [1, 1.15, 0.9, 1.05, 1],
+                    } : {}}
+                    transition={{ duration: 0.4 }}
+                    style={{
+                      backgroundColor: addingId === prod.id ? 'var(--primary)' : 'var(--secondary-container)',
+                      color: addingId === prod.id ? 'var(--on-primary)' : 'var(--on-secondary-container)',
+                      padding: '8px',
+                      borderRadius: 'var(--radius-default)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    <span className="material-symbols-outlined">
+                      {addingId === prod.id ? 'check' : 'add_shopping_cart'}
+                    </span>
+                  </motion.button>
                 </div>
-                <button 
-                  className="btn btn-primary" 
-                  style={{ marginTop: 'auto', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '10px', padding: '14px', fontSize: '1.1rem' }}
-                  onClick={() => addToCart(prod)}
-                >
-                  <ShoppingCart size={18} /> Add to Cart
-                </button>
               </div>
             </motion.div>
           ))}
         </AnimatePresence>
-        {filteredProducts.length === 0 && (
-          <div style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '40px', color: 'var(--text-muted)' }}>
-            No products found for this category.
-          </div>
-        )}
-      </motion.div>
-    </div>
+      </div>
+
+      {filteredProducts.length === 0 && (
+        <div style={{ textAlign: 'center', padding: '60px 0', color: 'var(--on-surface-variant)' }}>
+          No premium products found under this category selection.
+        </div>
+      )}
+    </main>
   );
 }

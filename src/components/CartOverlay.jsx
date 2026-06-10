@@ -1,91 +1,144 @@
 import React from 'react';
-import { X } from 'lucide-react';
 import { useAppContext } from '../context/AppContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 
 export default function CartOverlay({ isOpen, onClose }) {
-  const { cart, updateCartQuantity } = useAppContext();
+  const { cartItems, cartTotal, updateCartQuantity, removeFromCart } = useAppContext();
   const navigate = useNavigate();
-  
-  const cartItems = Object.values(cart);
-  const total = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
 
   return (
     <AnimatePresence>
       {isOpen && (
         <>
-          <motion.div 
+          {/* Backdrop */}
+          <motion.div
+            className="cart-overlay-bg"
             initial={{ opacity: 0 }}
-            animate={{ opacity: 0.5 }}
+            animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            style={{
-              position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
-              background: '#000', zIndex: 90
-            }}
           />
-          <motion.div 
+
+          {/* Drawer */}
+          <motion.div
+            className="cart-drawer"
             initial={{ x: '100%' }}
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
-            transition={{ type: 'tween', duration: 0.3 }}
-            style={{
-              position: 'fixed', top: 0, right: 0, width: '400px', maxWidth: '100%',
-              height: '100vh', background: 'var(--surface)', boxShadow: '-5px 0 15px rgba(0,0,0,0.1)',
-              zIndex: 100, display: 'flex', flexDirection: 'column'
-            }}
+            transition={{ type: 'tween', duration: 0.3, ease: 'easeOut' }}
           >
-            <div style={{ padding: '24px', borderBottom: '1px solid var(--border)', display: 'flex', justifyContent: 'space-between' }}>
-              <h2 style={{ margin: 0, fontSize: '1.5rem' }}>Your Cart</h2>
-              <button onClick={onClose} style={{ background: 'none', border: 'none', cursor: 'pointer' }}><X /></button>
-            </div>
-            
-            <div style={{ flex: 1, overflowY: 'auto', padding: '24px' }}>
-              {cartItems.length === 0 ? (
-                <p className="text-muted" style={{ textAlign: 'center', marginTop: '40px' }}>Your cart is empty.</p>
-              ) : (
-                cartItems.map(item => (
-                  <div key={item.id} style={{ display: 'flex', gap: '16px', marginBottom: '20px', paddingBottom: '20px', borderBottom: '1px solid var(--border)' }}>
-                    <img src={item.image} alt={item.name} style={{ width: '80px', height: '80px', borderRadius: 'var(--radius-md)', objectFit: 'cover' }} />
-                    <div style={{ flex: 1 }}>
-                      <div style={{ fontWeight: 600, marginBottom: '4px' }}>{item.name}</div>
-                      <div style={{ color: 'var(--primary)', fontWeight: 700 }}>${item.price.toFixed(2)}</div>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginTop: '8px' }}>
-                        <button style={btnStyle} onClick={() => updateCartQuantity(item.id, -1)}>-</button>
-                        <span>{item.quantity}</span>
-                        <button style={btnStyle} onClick={() => updateCartQuantity(item.id, 1)}>+</button>
-                      </div>
-                    </div>
-                  </div>
-                ))
-              )}
-            </div>
-
-            <div style={{ padding: '24px', borderTop: '1px solid var(--border)' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '1.25rem', fontWeight: 700, marginBottom: '20px' }}>
-                <span>Total:</span>
-                <span>${total.toFixed(2)}</span>
+            {/* Header */}
+            <div className="cart-header">
+              <div>
+                <h2 className="font-headline-sm text-headline-sm text-primary" style={{ margin: 0 }}>Your Basket</h2>
+                <p className="font-body-md text-on-surface-variant" style={{ margin: '4px 0 0 0', fontSize: '14px' }}>
+                  Premium essentials for your companion
+                </p>
               </div>
-              <button 
-                className="btn btn-primary" 
-                style={{ width: '100%' }} 
-                onClick={() => {
-                  onClose();
-                  navigate('/checkout');
-                }}
-              >
-                Checkout
+              <button className="cart-close-btn" onClick={onClose} aria-label="Close cart">
+                <span className="material-symbols-outlined">close</span>
               </button>
             </div>
+
+            {/* Items */}
+            <div className="cart-items">
+              <AnimatePresence mode="popLayout">
+                {cartItems.length === 0 ? (
+                  <motion.div
+                    className="cart-empty"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    style={{ textAlign: 'center', padding: '40px 0' }}
+                  >
+                    <span className="material-symbols-outlined text-6xl text-outline-variant/50 mb-4" style={{ fontSize: '64px', opacity: 0.5 }}>
+                      shopping_basket
+                    </span>
+                    <p className="text-on-surface-variant">Your basket is currently empty.</p>
+                    <button className="btn btn-outline btn-sm" onClick={onClose} style={{ marginTop: '16px' }}>
+                      Browse Store
+                    </button>
+                  </motion.div>
+                ) : (
+                  cartItems.map(item => (
+                    <motion.div
+                      key={item.id}
+                      className="cart-item"
+                      layout
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: 20, height: 0, marginBottom: 0 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                        className="cart-item-img"
+                        onError={e => { e.target.src = '/images/pet_food_1780981574632.png'; }}
+                      />
+                      <div className="cart-item-info">
+                        <div className="cart-item-name">{item.name}</div>
+                        <div className="cart-item-price">${item.price.toFixed(2)}</div>
+                        <div className="qty-controls">
+                          <button
+                            className="qty-btn"
+                            onClick={() => updateCartQuantity(item.id, -1)}
+                            aria-label="Decrease quantity"
+                          >
+                            -
+                          </button>
+                          <span style={{ fontWeight: 600, minWidth: 20, textAlign: 'center', color: 'var(--on-surface)' }}>
+                            {item.quantity}
+                          </span>
+                          <button
+                            className="qty-btn"
+                            onClick={() => updateCartQuantity(item.id, 1)}
+                            aria-label="Increase quantity"
+                          >
+                            +
+                          </button>
+                          <button
+                            className="icon-btn"
+                            onClick={() => removeFromCart(item.id)}
+                            aria-label="Remove item"
+                            style={{ marginLeft: 'auto', width: '32px', height: '32px' }}
+                          >
+                            <span className="material-symbols-outlined text-[20px] text-error">delete</span>
+                          </button>
+                        </div>
+                      </div>
+                    </motion.div>
+                  ))
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* Footer */}
+            {cartItems.length > 0 && (
+              <div className="cart-footer">
+                <div className="cart-total-row">
+                  <span className="text-on-surface-variant">Total</span>
+                  <span className="text-primary">${cartTotal.toFixed(2)}</span>
+                </div>
+                <button
+                  className="w-full bg-primary text-on-primary py-4 rounded-xl font-label-md text-label-md hover:shadow-lg transition-all active:scale-95 duration-200"
+                  onClick={() => { onClose(); navigate('/checkout'); }}
+                  style={{
+                    backgroundColor: 'var(--primary)',
+                    color: 'var(--on-primary)',
+                    width: '100%',
+                    padding: '16px 0',
+                    borderRadius: 'var(--radius-default)',
+                    fontWeight: 600,
+                  }}
+                >
+                  Proceed to Checkout
+                </button>
+              </div>
+            )}
           </motion.div>
         </>
       )}
     </AnimatePresence>
   );
 }
-
-const btnStyle = {
-  background: 'var(--bg-color)', border: '1px solid var(--border)', borderRadius: '4px',
-  width: '28px', height: '28px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center'
-};

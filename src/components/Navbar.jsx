@@ -1,132 +1,254 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { ShoppingCart, User, Dog, Menu } from 'lucide-react';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useAppContext } from '../context/AppContext';
-import { motion, AnimatePresence } from 'framer-motion';
+
+const navLinks = [
+  { to: '/',            label: 'Home' },
+  { to: '/store',       label: 'Store' },
+  { to: '/services',    label: 'Services' },
+  { to: '/profile',     label: 'Medical Vault' },
+  { to: '/our-story',   label: 'About Us' },
+  { to: '/contact',     label: 'Contact' },
+];
 
 export default function Navbar({ onOpenCart }) {
   const { cartItemsCount } = useAppContext();
   const location = useLocation();
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const userMenuRef = React.useRef(null);
 
-  const isActive = (path) => location.pathname === path;
+  const isActive = (path) => {
+    if (path === '/') return location.pathname === '/';
+    return location.pathname.startsWith(path);
+  };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    setIsMenuOpen(false);
+    setIsDropdownOpen(false);
+  }, [location.pathname]);
+
+  // Close dropdown when tapping outside (for mobile)
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (userMenuRef.current && !userMenuRef.current.contains(e.target)) {
+        setIsDropdownOpen(false);
+      }
+    };
+    if (isDropdownOpen) {
+      document.addEventListener('pointerdown', handleClickOutside);
+    }
+    return () => document.removeEventListener('pointerdown', handleClickOutside);
+  }, [isDropdownOpen]);
 
   return (
-    <header>
-      <div className="container nav-container">
-        <Link to="/" className="logo">
-          <Dog size={32} color="var(--primary)" style={{ flexShrink: 0 }} /> Tiny Paws
-        </Link>
+    <>
+      <header className={scrolled ? 'shadow-md py-2' : 'shadow-sm py-0'} style={{ transition: 'all 0.3s ease' }}>
+        <div className="nav-container">
+        {/* Logo and Mobile Toggle Group */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          {/* Mobile Menu Button (Hamburger) */}
+          <button
+            className="hamburger-btn icon-btn"
+            onClick={() => setIsMenuOpen(true)}
+            aria-label="Toggle Menu"
+          >
+            <span className="material-symbols-outlined text-2xl">menu</span>
+          </button>
 
-        {/* Desktop Navigation Links */}
-        <nav className="nav-links" style={{ fontSize: '1.1rem' }}>
-          <Link to="/" style={{ color: isActive('/') ? 'var(--primary)' : 'inherit', fontWeight: 500 }}>Home</Link>
-          <Link to="/store" style={{ color: isActive('/store') ? 'var(--primary)' : 'inherit', fontWeight: 500 }}>Store</Link>
-          <Link to="/services" style={{ color: isActive('/services') ? 'var(--primary)' : 'inherit', fontWeight: 500 }}>Services</Link>
-          <Link to="/contact" style={{ color: isActive('/contact') ? 'var(--primary)' : 'inherit', fontWeight: 500 }}>Contact</Link>
+          {/* Logo */}
+          <Link to="/" className="logo">
+            Tiny Paws
+          </Link>
+        </div>
+
+        {/* Desktop Nav Links */}
+        <nav className="nav-links">
+          {navLinks.map((link) => (
+            <Link
+              key={link.to}
+              to={link.to}
+              className={`nav-link ${isActive(link.to) ? 'active' : ''}`}
+            >
+              {link.label}
+            </Link>
+          ))}
         </nav>
 
-        <div className="nav-icons" style={{ position: 'relative' }}>
+        {/* Action Buttons */}
+        <div className="nav-actions">
+          {/* Cart Icon Button */}
+          <div className="cart-btn-wrapper">
+            <button
+              className="icon-btn"
+              onClick={onOpenCart}
+              aria-label="Open Cart"
+            >
+              <span className="material-symbols-outlined text-primary text-2xl">shopping_cart</span>
+            </button>
+            <AnimatePresence>
+              {cartItemsCount > 0 && (
+                <motion.span
+                  className="cart-badge"
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  exit={{ scale: 0 }}
+                  key={cartItemsCount}
+                >
+                  {cartItemsCount}
+                </motion.span>
+              )}
+            </AnimatePresence>
+          </div>
 
-          {/* User Dropdown */}
+          {/* User Account / Profile */}
           <div
-            style={{ position: 'relative', cursor: 'pointer' }}
+            className="user-menu"
+            ref={userMenuRef}
             onMouseEnter={() => setIsDropdownOpen(true)}
             onMouseLeave={() => setIsDropdownOpen(false)}
           >
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '8px', color: 'var(--text-main)' }}>
-              <User size={24} />
-            </div>
+            <button
+              className="icon-btn"
+              aria-label="Account Menu"
+              onClick={() => setIsDropdownOpen((prev) => !prev)}
+            >
+              <span
+                className="material-symbols-outlined text-primary text-2xl"
+                style={{ fontVariationSettings: isDropdownOpen || isActive('/profile') ? "'FILL' 1" : "'FILL' 0" }}
+              >
+                account_circle
+              </span>
+            </button>
 
             <AnimatePresence>
               {isDropdownOpen && (
                 <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 10 }}
+                  className="user-dropdown"
+                  initial={{ opacity: 0, y: 8, scale: 0.95 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: 8, scale: 0.95 }}
                   transition={{ duration: 0.2 }}
-                  style={{
-                    position: 'absolute', top: '100%', right: 0, width: '200px',
-                    background: 'var(--surface)', borderRadius: 'var(--radius-md)',
-                    boxShadow: 'var(--shadow-md)', border: '1px solid var(--border)',
-                    overflow: 'hidden', zIndex: 100
-                  }}
                 >
-                  <Link to="/profile" style={{ display: 'block', padding: '12px 16px', borderBottom: '1px solid var(--border)' }} className="dropdown-link">
-                    My Profile
-                  </Link>
-                  <Link to="/signin" style={{ display: 'block', padding: '12px 16px', color: 'var(--primary)', fontWeight: 600 }} className="dropdown-link">
+                  <Link to="/profile" className="dropdown-item">Medical Vault</Link>
+                  <div className="dropdown-divider" />
+                  <Link to="/signin" className="dropdown-item" style={{ color: 'var(--primary)', fontWeight: 600 }}>
                     Sign In / Sign Up
                   </Link>
                 </motion.div>
               )}
             </AnimatePresence>
           </div>
-
-          <div onClick={onOpenCart} className="cart-icon" style={{ position: 'relative', cursor: 'pointer', padding: '8px' }}>
-            <ShoppingCart size={24} />
-            {cartItemsCount > 0 && (
-              <motion.span
-                initial={{ scale: 0 }} animate={{ scale: 1 }}
-                className="cart-count" style={{
-                  position: 'absolute', top: 0, right: 0, background: 'var(--primary)', color: 'white',
-                  fontSize: '0.75rem', fontWeight: 'bold', height: '20px', width: '20px', borderRadius: '50%',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center'
-                }}
-              >
-                {cartItemsCount}
-              </motion.span>
-            )}
-          </div>
-
-          {/* Hamburger Menu Button (mobile only) */}
-          <div onClick={() => setIsMenuOpen(!isMenuOpen)} className="hamburger-menu" style={{ cursor: 'pointer', padding: '8px' }}>
-            <Menu size={24} color="var(--text-main)" />
-          </div>
         </div>
       </div>
-
-      {/* Mobile Menu */}
-      <motion.div
-        className="mobile-menu"
-        initial={{ opacity: 0, y: -20 }}
-        animate={isMenuOpen ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
-        exit={{ opacity: 0, y: -20 }}
-        transition={{ duration: 0.3 }}
-        style={{
-          display: isMenuOpen ? 'block' : 'none',
-          position: 'absolute',
-          top: '100%',
-          left: 0,
-          right: 0,
-          background: 'var(--surface)',
-          borderTop: '1px solid var(--border)',
-          padding: '20px',
-          zIndex: 100
-        }}
-      >
-        <nav style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-          <Link to="/" style={{ color: isActive('/') ? 'var(--primary)' : 'var(--text-main)', fontWeight: 500, textDecoration: 'none' }} onClick={() => setIsMenuOpen(false)}>
-            Home
-          </Link>
-          <Link to="/store" style={{ color: isActive('/store') ? 'var(--primary)' : 'var(--text-main)', fontWeight: 500, textDecoration: 'none' }} onClick={() => setIsMenuOpen(false)}>
-            Store
-          </Link>
-          <Link to="/services" style={{ color: isActive('/services') ? 'var(--primary)' : 'var(--text-main)', fontWeight: 500, textDecoration: 'none' }} onClick={() => setIsMenuOpen(false)}>
-            Services
-          </Link>
-          <Link to="/contact" style={{ color: isActive('/contact') ? 'var(--primary)' : 'var(--text-main)', fontWeight: 500, textDecoration: 'none' }} onClick={() => setIsMenuOpen(false)}>
-            Contact
-          </Link>
-          <Link to="/profile" style={{ color: isActive('/profile') ? 'var(--primary)' : 'var(--text-main)', fontWeight: 500, textDecoration: 'none', borderTop: '1px solid var(--border)', paddingTop: '16px' }} onClick={() => setIsMenuOpen(false)}>
-            My Profile
-          </Link>
-          <Link to="/signin" style={{ color: isActive('/signin') ? 'var(--primary)' : 'var(--text-main)', fontWeight: 500, textDecoration: 'none' }} onClick={() => setIsMenuOpen(false)}>
-            Sign In / Sign Up
-          </Link>
-        </nav>
-      </motion.div>
     </header>
+
+      {/* Mobile Menu Drawer — rendered outside header so position:fixed works correctly */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <>
+            {/* Backdrop Overlay */}
+            <motion.div
+              className="mobile-nav-overlay"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsMenuOpen(false)}
+            />
+            {/* Drawer */}
+            <motion.aside
+              className="mobile-nav-drawer"
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+            >
+              <div className="mobile-nav-header">
+                <span className="font-headline-sm text-primary">Menu</span>
+                <button
+                  className="icon-btn"
+                  onClick={() => setIsMenuOpen(false)}
+                  aria-label="Close Menu"
+                >
+                  <span className="material-symbols-outlined text-2xl">close</span>
+                </button>
+              </div>
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                <Link
+                  to="/"
+                  className={`mobile-drawer-link ${isActive('/') ? 'active' : ''}`}
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  <span className="material-symbols-outlined">home</span>
+                  <span>Home</span>
+                </Link>
+                <Link
+                  to="/store"
+                  className={`mobile-drawer-link ${isActive('/store') ? 'active' : ''}`}
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  <span className="material-symbols-outlined">shopping_bag</span>
+                  <span>Store</span>
+                </Link>
+                <Link
+                  to="/services"
+                  className={`mobile-drawer-link ${isActive('/services') ? 'active' : ''}`}
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  <span className="material-symbols-outlined">medical_services</span>
+                  <span>Services</span>
+                </Link>
+                <Link
+                  to="/profile"
+                  className={`mobile-drawer-link ${isActive('/profile') ? 'active' : ''}`}
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  <span className="material-symbols-outlined">vaccines</span>
+                  <span>Medical Vault</span>
+                </Link>
+                <Link
+                  to="/our-story"
+                  className={`mobile-drawer-link ${isActive('/our-story') ? 'active' : ''}`}
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  <span className="material-symbols-outlined">info</span>
+                  <span>About Us</span>
+                </Link>
+                <Link
+                  to="/contact"
+                  className={`mobile-drawer-link ${isActive('/contact') ? 'active' : ''}`}
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  <span className="material-symbols-outlined">mail</span>
+                  <span>Contact</span>
+                </Link>
+              </div>
+
+              <div className="mobile-drawer-footer">
+                <Link
+                  to="/signin"
+                  className="btn btn-primary"
+                  style={{ width: '100%', padding: '14px 24px' }}
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Sign In
+                </Link>
+              </div>
+            </motion.aside>
+          </>
+        )}
+      </AnimatePresence>
+    </>
   );
 }
