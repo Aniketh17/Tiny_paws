@@ -1,0 +1,344 @@
+<!DOCTYPE html><html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>About Us | Tiny Paws Premium Pet Care</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Playfair+Display:wght@600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-fixed-variant": "#4b4639",
+                    "primary-container": "#2d5a54",
+                    "on-tertiary-container": "#ffb49d",
+                    "secondary": "#645e50",
+                    "primary-fixed-dim": "#a1d0c8",
+                    "on-tertiary-fixed-variant": "#77311b",
+                    "error": "#ba1a1a",
+                    "tertiary": "#682610",
+                    "inverse-on-surface": "#f3f0ef",
+                    "on-tertiary-fixed": "#3a0a00",
+                    "surface-variant": "#e4e2e1",
+                    "inverse-surface": "#303030",
+                    "surface-container": "#f0eded",
+                    "on-primary-container": "#a1cfc8",
+                    "surface-dim": "#dcd9d9",
+                    "primary": "#13423d",
+                    "background": "#fcf9f8",
+                    "tertiary-fixed-dim": "#ffb59f",
+                    "surface": "#fcf9f8",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-fixed-variant": "#204e48",
+                    "surface-container-high": "#eae7e7",
+                    "surface-container-lowest": "#ffffff",
+                    "error-container": "#ffdad6",
+                    "outline-variant": "#c0c8c6",
+                    "on-secondary": "#ffffff",
+                    "secondary-fixed-dim": "#cec6b5",
+                    "on-surface-variant": "#404847",
+                    "on-error": "#ffffff",
+                    "surface-bright": "#fcf9f8",
+                    "secondary-fixed": "#eae2d0",
+                    "on-surface": "#1b1c1c",
+                    "inverse-primary": "#a1d0c8",
+                    "on-primary-fixed": "#00201d",
+                    "tertiary-container": "#863c25",
+                    "on-primary": "#ffffff",
+                    "surface-container-low": "#f6f3f2",
+                    "surface-container-highest": "#e4e2e1",
+                    "tertiary-fixed": "#ffdbd0",
+                    "on-secondary-container": "#6a6456",
+                    "on-error-container": "#93000a",
+                    "secondary-container": "#eae2d0",
+                    "on-background": "#1b1c1c",
+                    "surface-tint": "#396660",
+                    "primary-fixed": "#bcece4",
+                    "outline": "#707977",
+                    "on-secondary-fixed": "#1f1b10"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-mobile": "16px",
+                    "container-max": "1280px",
+                    "stack-lg": "48px",
+                    "gutter": "24px",
+                    "stack-sm": "12px",
+                    "stack-md": "24px",
+                    "margin-desktop": "40px",
+                    "base": "8px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Playfair Display"],
+                    "display-lg-mobile": ["Playfair Display"],
+                    "body-md": ["Inter"],
+                    "headline-sm": ["Playfair Display"],
+                    "label-md": ["Inter"],
+                    "display-lg": ["Playfair Display"],
+                    "body-lg": ["Inter"],
+                    "label-sm": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-md": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-sm": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .hero-gradient {
+            background: linear-gradient(180deg, rgba(252,249,248,0) 0%, rgba(252,249,248,1) 100%);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md overflow-x-hidden">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-surface/80 dark:bg-surface-dim/80 backdrop-blur-md border-b border-outline-variant dark:border-outline shadow-sm transition-all duration-300"><div class="flex justify-between items-center px-gutter py-4 w-full max-w-container-max mx-auto"><div class="flex items-center gap-8"><a class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed" href="#">Tiny Paws</a><div class="hidden md:flex gap-6 items-center"><a class="font-label-md text-label-md text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors" href="#">Store</a><a class="font-label-md text-label-md text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors" href="#">Services</a><a class="font-label-md text-label-md text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors" href="#">Medical Vault</a><a class="font-label-md text-label-md text-primary dark:text-primary-fixed border-b-2 border-primary dark:border-primary-fixed pb-1" href="#">About Us</a></div></div><div class="flex items-center gap-4"><button class="p-2 hover:bg-primary-container/10 rounded-lg transition-all active:scale-95 duration-200"><span class="material-symbols-outlined">shopping_cart</span></button><button class="p-2 hover:bg-primary-container/10 rounded-lg transition-all active:scale-95 duration-200"><span class="material-symbols-outlined">account_circle</span></button><button class="md:hidden p-2"><span class="material-symbols-outlined">menu</span></button></div></div></nav>
+<main class="pt-20">
+<!-- Hero Section -->
+<section class="relative h-[80vh] flex items-center overflow-hidden">
+<div class="absolute inset-0 z-0">
+<img alt="Veterinarian with golden retriever" class="w-full h-full object-cover" data-alt="A professional female veterinarian in a clean, modern clinic setting gently examining a happy golden retriever. The lighting is soft and natural, coming from large windows. The overall aesthetic is premium and airy, with a soft color palette of sage teal and warm cream tones, reflecting a high-end pet care environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDjdSk7o6FyuocBYb0Hnbp9INyx2OMSs4ej_FeKzmFS0NBpP2O7rIB9vet20bm8t6MjBE7tEVTOymtkkbYVjXILK6JubFO__zI4QVEX4hyo7Ci0XYxaKGIXamn7xGaDCsRQ3VXouJ83Inu_Jbe3BhYJCGmddvS6PftIQxnrt84St1D4_4vUFsfmP3DyPIwX0MVr6kWJP9jhww47mGfd-P7Vn3B_mttbF-UsNZF1y-gpC2nFfepaTTuXv7O3A9nG52auPDcgvlEotTo">
+<div class="absolute inset-0 hero-gradient"></div>
+</div>
+<div class="relative z-10 max-w-container-max mx-auto px-margin-desktop w-full">
+<div class="max-w-2xl">
+<span class="font-label-md text-label-md text-primary-container bg-primary-fixed px-4 py-1.5 rounded-full mb-6 inline-block">OUR STORY</span>
+<h1 class="font-display-lg text-display-lg text-primary mb-6 leading-tight">Where Clinical Excellence Meets <span class="italic font-serif">Heartfelt Care</span></h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-8 max-w-xl">Founded by a collective of visionary veterinarians and designers, Tiny Paws was born from a simple realization: our pets deserve a standard of care as sophisticated as our own.</p>
+</div>
+</div>
+</section>
+<!-- Mission & Philosophy - Bento Grid -->
+<section class="py-stack-lg max-w-container-max mx-auto px-margin-desktop">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Mission Card -->
+<div class="md:col-span-7 bg-primary-container text-on-primary-container p-12 rounded-3xl flex flex-col justify-end min-h-[400px] relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-12 opacity-10 group-hover:scale-110 transition-transform duration-700">
+<span class="material-symbols-outlined text-[120px]" data-icon="auto_awesome">auto_awesome</span>
+</div>
+<h2 class="font-headline-md text-headline-md mb-6">Our Mission</h2>
+<p class="font-body-lg text-body-lg opacity-90 max-w-lg leading-relaxed">To redefine the pet parenting experience through science-backed nutrition, intuitive design, and a relentless commitment to longevity. We don't just treat pets; we advocate for their fullest, healthiest lives.</p>
+</div>
+<!-- Clinical Roots Card -->
+<div class="md:col-span-5 bg-secondary-container p-10 rounded-3xl flex flex-col justify-between">
+<div>
+<div class="w-12 h-12 bg-primary rounded-xl flex items-center justify-center text-on-primary mb-6">
+<span class="material-symbols-outlined" data-icon="stethoscope">stethoscope</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-primary mb-4">Founded by Experts</h3>
+<p class="font-body-md text-body-md text-on-secondary-container">Our board-certified veterinary founders ensure every product and service meets rigorous medical standards before it ever reaches your home.</p>
+</div>
+<div class="mt-8 flex -space-x-4">
+<img alt="Team member" class="w-12 h-12 rounded-full border-2 border-surface object-cover" data-alt="Close up portrait of a professional female medical researcher in a modern laboratory. She is wearing white clinical attire. The lighting is crisp and bright, matching a premium, professional healthcare brand aesthetic with soft cream and sage accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAwMWIuhhb4g27gtjTBWg77KrPkcpn23HL8hpRMY8jSv6F42kBu-rxxAt2VBDPNApuoT6-9ZurQJOK_W66_9JwpgiS3mFzMMkeUXPsuMohGgtIUXZ0h7-QF7GflAbHErSN_hy-rEUIbArD17XhwwlyTFrHhrmM0bEOS5HuMxDec_oq2cHDK-G8cmzmAYluDS7rxhVZfTWff_JTv7It0gPcRvWBtzN6CcrvE4En6uhbD4rFClBX5ZOB153p-xGnCRFlfHwYoyX1zIi0">
+<img alt="Team member" class="w-12 h-12 rounded-full border-2 border-surface object-cover" data-alt="Portrait of a friendly male veterinarian in his late 30s wearing a modern sage-colored scrub. He has a warm, trustworthy expression. The background is a blurred high-end veterinary clinic with soft, warm lighting and a minimalist design." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCub5chbmMHxtBfc3ZPUXuFT5xSxGCwVIZ0FywnzFEGxlO-wyDtul6G4Cn3C_1uTtJEgTvQuA_hIEDaAn-xre3Mmrne6qm3NYyLXYhR12uso5BF2sLqFgoeQcmIo4heVCmz7WffC8juaVGOrALEu66TeT411nZKfp9wrvBTIs-VlYEDk3oj81uKVX14LoTfFMi3mcdpUmtO1gwi5gjlIj_69i9NYvIM-kVs45fo2W-65Eof75HbQVo8QqCfJ5AqGcO6mgQH5NUWUh4">
+<img alt="Team member" class="w-12 h-12 rounded-full border-2 border-surface object-cover" data-alt="A portrait of a senior female medical advisor with a kind and authoritative presence. She is in a bright, modern office with plants in the background. The aesthetic is clean, professional, and reflects high-end hospitality and medical reliability." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDuGIWelJLPHcbjGuVPWMfCqg6LEAu79n0UzT4nEB3ls44thXuhDfz6k2XbcLOuBGaQa8gymiZ4QXtmXe1hQDiGQn4PkredyiJF9nmCwCCZM05ye389cLZ7zovXZTpEGyMp6rn4YFClLyR1ix7S5MCjt6Ev1ImOJ-As48QHG4H6Am_lZN-2fliVWIpZ5i8dJ2Hql8fRDDfp3acYKIgDJ6pkATtunJ7topjUvAEFwovztVrVqPBQOXx7c6cTM0vKNLbK6XWiiOU_0vM">
+<div class="w-12 h-12 rounded-full bg-primary text-on-primary border-2 border-surface flex items-center justify-center text-xs font-bold">+12</div>
+</div>
+</div>
+<!-- Design Card -->
+<div class="md:col-span-5 bg-surface-container-high rounded-3xl p-10 flex flex-col justify-center">
+<h3 class="font-headline-sm text-headline-sm text-primary mb-4">The Designer's Touch</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 leading-relaxed">Pet care shouldn't feel like a chore. Our design team creates products that seamlessly integrate into the modern, aesthetic home.</p>
+<div class="relative rounded-2xl overflow-hidden aspect-video">
+<img alt="Modern pet home" class="w-full h-full object-cover" data-alt="A beautifully designed modern living room featuring a minimalist cat tree and a premium sage-colored pet bed. The interior design is Scandinavian-inspired with light wood, cream textiles, and soft natural light. The scene exemplifies how pet products can be part of a high-end home aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBiatXXq3KlnXtJvoxnwNOLhmf_uJS56NJdAN82EN3owEND8IZg8wJ3DqF5pgV9_W9C7PLdFYdn8_I6xVURL0lsrR4aCKAJXQN32LFkBYQgiBD8QwnXqgj-NSc-dBgj4t_ShODIVajrYMcmd8ncfxkgJXbLfJPuMtZXE_NkCKKWVXwc3qM2ocltqd8p7DWNu0ol9vAGGTGo_Po0ufFUsu9P8VCDZklzhtpdDc4b-d3CKvREJiHQcDb6ctssKOOm9VY8nADTG85bzAA">
+</div>
+</div>
+<!-- Values Card -->
+<div class="md:col-span-7 bg-white border border-outline-variant rounded-3xl p-10 flex flex-col justify-between">
+<div class="flex justify-between items-start mb-8">
+<h3 class="font-headline-sm text-headline-sm text-primary">The Tiny Paws Standard</h3>
+<span class="text-tertiary font-label-md uppercase tracking-widest">Quality &amp; Ethics</span>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+<div>
+<div class="flex items-center gap-3 mb-2 text-primary">
+<span class="material-symbols-outlined" data-icon="verified">verified</span>
+<span class="font-bold">Medical Grade</span>
+</div>
+<p class="text-sm text-on-surface-variant">Every formulation is tested in clinical settings to ensure efficacy and safety.</p>
+</div>
+<div>
+<div class="flex items-center gap-3 mb-2 text-primary">
+<span class="material-symbols-outlined" data-icon="eco">eco</span>
+<span class="font-bold">Sustainably Sourced</span>
+</div>
+<p class="text-sm text-on-surface-variant">We prioritize ethical farms and eco-friendly packaging for a better planet.</p>
+</div>
+<div>
+<div class="flex items-center gap-3 mb-2 text-primary">
+<span class="material-symbols-outlined" data-icon="visibility">visibility</span>
+<span class="font-bold">Total Transparency</span>
+</div>
+<p class="text-sm text-on-surface-variant">Full ingredient disclosure and lab results available for every single batch.</p>
+</div>
+<div>
+<div class="flex items-center gap-3 mb-2 text-primary">
+<span class="material-symbols-outlined" data-icon="volunteer_activism">volunteer_activism</span>
+<span class="font-bold">Rescue Advocacy</span>
+</div>
+<p class="text-sm text-on-surface-variant">A portion of every sale goes directly to providing medical care for shelter pets.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Dynamic Experience Section -->
+<section class="py-stack-lg bg-surface-container-low relative overflow-hidden">
+
+<div class="max-w-container-max mx-auto px-margin-desktop relative z-10 text-center">
+<h2 class="font-headline-md text-headline-md text-primary mb-12">Crafted for Their Comfort</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<div class="glass-card p-8 rounded-3xl border border-white/50 text-center transform hover:-translate-y-2 transition-all duration-300">
+<span class="material-symbols-outlined text-4xl text-primary mb-4" data-icon="favorite">favorite</span>
+<h4 class="font-headline-sm text-headline-sm mb-2">Unmatched Love</h4>
+<p class="text-on-surface-variant">We treat every customer’s pet as if they were our own founding furry members.</p>
+</div>
+<div class="glass-card p-8 rounded-3xl border border-white/50 text-center transform hover:-translate-y-2 transition-all duration-300">
+<span class="material-symbols-outlined text-4xl text-primary mb-4" data-icon="science">science</span>
+<h4 class="font-headline-sm text-headline-sm mb-2">Scientific Rigor</h4>
+<p class="text-on-surface-variant">Innovation driven by research, not trends. We follow the science to the bowl.</p>
+</div>
+<div class="glass-card p-8 rounded-3xl border border-white/50 text-center transform hover:-translate-y-2 transition-all duration-300">
+<span class="material-symbols-outlined text-4xl text-primary mb-4" data-icon="home_health">home_health</span>
+<h4 class="font-headline-sm text-headline-sm mb-2">Life at Home</h4>
+<p class="text-on-surface-variant">Wellness is a 24/7 journey. We provide the tools to make it effortless.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Our Team Section -->
+<section class="py-stack-lg max-w-container-max mx-auto px-margin-desktop">
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+<div class="max-w-xl">
+<h2 class="font-headline-md text-headline-md text-primary mb-4">The Minds Behind the Paws</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">A multi-disciplinary team dedicated to the evolution of pet longevity and happiness.</p>
+</div>
+<button class="bg-primary-container text-on-primary-container px-8 py-3 rounded-full font-label-md hover:opacity-90 transition-opacity">Join the Team</button>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter">
+<!-- Team Member 1 -->
+<div class="group cursor-pointer">
+<div class="aspect-[3/4] rounded-3xl overflow-hidden mb-4 relative">
+<img alt="Dr. Sarah Chen" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="A professional headshot of a female veterinarian in her early 40s. She is wearing a modern, charcoal-colored medical scrub and has a stethoscope around her neck. The lighting is soft and flattering, typical of high-end editorial photography, against a neutral, warm background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9qnGgfbeJNKTJDz9WOOLKTX8_Nb2mJEc_EdsJJKbbG95UExM-Ek-CiZDWUebP5MJXaQfVqx645cFN_m4y8uU7OF9Ds01PCpMe_hzpZAijTvHmjJPjLcAUuLrTRiw-eAt5zZnFsw2i6Naoq3ryX1CN3fgh_ws4_14KoAHoTRyhAEWNIlq6NAkvj2dnXB5GKjT7JIl_FJYmxANGrUA82Yjmo2SAR_sf8T_pYr0dx3iqHlgjNjKiEQlD-EBeV_Z-coGA94PefH01DeE">
+<div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
+<div class="bg-white/90 backdrop-blur-md w-full p-4 rounded-xl translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+<p class="text-xs font-bold text-primary uppercase mb-1">Chief Veterinary Officer</p>
+<p class="text-sm text-on-surface">15+ years in feline nutrition.</p>
+</div>
+</div>
+</div>
+<h5 class="font-headline-sm text-headline-sm text-primary">Dr. Sarah Chen</h5>
+<p class="text-on-surface-variant">Co-Founder &amp; CVO</p>
+</div>
+<!-- Team Member 2 -->
+<div class="group cursor-pointer">
+<div class="aspect-[3/4] rounded-3xl overflow-hidden mb-4 relative">
+<img alt="Marcus Thorne" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="A stylish male industrial designer in his 30s with a creative and modern look. He is wearing a minimalist cream-colored sweater and dark trousers. He is standing in a brightly lit design studio with architectural models in the background. High-key, clean lighting with a premium feel." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAqDyXUEUJtyhN44ttaBuofHWMStfBUmTOXAlLYUXIL9J8P3mfyRTIdGYG6e_Xj6s08l7xYkN2YEg_RM-joGkDMzcRtIIrcMwJsdNO40ElF_-scagPzMTaD6yPeNpR4Npf9-kFAIhsXET4M-pNvxts3vSL7iGmiTjOjQepG2L3bAEYVhhYlhJ79EZUZh2QK8y2T9innT4j2eBAUMRyALLl5jWc3u_yeWmkQbH64kuALjLPbStoh898RatR0cgJAtnpKdQvHXQRxWG0">
+<div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
+<div class="bg-white/90 backdrop-blur-md w-full p-4 rounded-xl translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+<p class="text-xs font-bold text-primary uppercase mb-1">Head of Product Design</p>
+<p class="text-sm text-on-surface">Former Senior Lead at Apple.</p>
+</div>
+</div>
+</div>
+<h5 class="font-headline-sm text-headline-sm text-primary">Marcus Thorne</h5>
+<p class="text-on-surface-variant">Design Principal</p>
+</div>
+<!-- Team Member 3 -->
+<div class="group cursor-pointer">
+<div class="aspect-[3/4] rounded-3xl overflow-hidden mb-4 relative">
+<img alt="Elena Rodriguez" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="A portrait of a confident female operations director in a professional business-casual outfit. She has a warm and welcoming smile. The background is a modern, light-filled office with glass walls and plants. The overall aesthetic is professional, reliable, and premium." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0ZCFwM0PkV8ZeMxhZA6ik2xxJI1UUjnM1RhfDLtMUvgB98qhORyPQubLdbLIFjTvOSybKZqVCun8ZRsNKYrFUe4N8jEljdH4W5xaFJRntAziR95zgyVi1qGWpudMdQ_-DW9wOqK671CNYydJK3vxMTOR1I2hR8UNftS87kQU_PYxuDGT59_5NX0DqHsJhZ22hYq_C6mVkbrO7un9cjuI87EnX713qU13lhIoTjq919FR5q3x_BEBkd1Hy6qT6pcG2kc-lY9t_im8">
+<div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
+<div class="bg-white/90 backdrop-blur-md w-full p-4 rounded-xl translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+<p class="text-xs font-bold text-primary uppercase mb-1">Director of Operations</p>
+<p class="text-sm text-on-surface">Supply chain ethics expert.</p>
+</div>
+</div>
+</div>
+<h5 class="font-headline-sm text-headline-sm text-primary">Elena Rodriguez</h5>
+<p class="text-on-surface-variant">Operations Lead</p>
+</div>
+<!-- Team Member 4 -->
+<div class="group cursor-pointer">
+<div class="aspect-[3/4] rounded-3xl overflow-hidden mb-4 relative">
+<img alt="David Kim" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="Portrait of a male scientist in his late 20s wearing a high-end lab coat in a state-of-the-art research facility. He is looking thoughtfully at a digital tablet. The lighting is clean and laboratory-grade, but with a warm, human touch through soft focus and high-end photographic composition." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJscnPFzAWBFKEXy3xfywoa77kypvSnr_cIjvDteKyjW9fBO06aSa8MbDLrlw-GkDAlqzz3SXF92hZd3qAgDJD1ieRQBNOsIJE8LaD9rqVOr8fCqZfsMpTWio1xwU8emJHmYDuQw3qAY2lD7TL-6Bb1n4FAJhtIWwP6BdDQo8ZLWUMuFvHp6_dJkZ3smzkTXmGSucRmiX7goFBm5O_we-tEqruZ-FHadZOGOeZjY6wiC_juOkecF_a6s3-FViLbcp5vkRZc6Q_YF4">
+<div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
+<div class="bg-white/90 backdrop-blur-md w-full p-4 rounded-xl translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+<p class="text-xs font-bold text-primary uppercase mb-1">Research Lead</p>
+<p class="text-sm text-on-surface">Ph.D. in Animal Physiology.</p>
+</div>
+</div>
+</div>
+<h5 class="font-headline-sm text-headline-sm text-primary">Dr. David Kim</h5>
+<p class="text-on-surface-variant">Lead Researcher</p>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="py-stack-lg px-margin-desktop">
+<div class="max-w-4xl mx-auto bg-primary text-on-primary rounded-[40px] p-12 text-center relative overflow-hidden">
+<div class="absolute top-0 left-0 w-full h-full opacity-10">
+<svg class="w-full h-full fill-current" viewBox="0 0 100 100">
+<circle cx="10" cy="10" r="5"></circle>
+<circle cx="90" cy="20" r="8"></circle>
+<circle cx="30" cy="80" r="12"></circle>
+</svg>
+</div>
+<h2 class="font-display-lg text-display-lg mb-6">Ready to elevate their care?</h2>
+<p class="font-body-lg text-body-lg mb-10 opacity-80 max-w-xl mx-auto">Experience the Tiny Paws difference with our curated selection of premium essentials.</p>
+<div class="flex flex-col sm:flex-row gap-4 justify-center">
+<button class="bg-white text-primary px-10 py-4 rounded-full font-bold hover:bg-opacity-90 transition-all">Shop the Collection</button>
+<button class="border border-white/30 text-white px-10 py-4 rounded-full font-bold hover:bg-white/10 transition-all">Explore Services</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-low dark:bg-surface-container-lowest full-width bottom border-t border-outline-variant/20"><div class="grid grid-cols-1 md:grid-cols-4 gap-stack-lg px-gutter py-stack-lg max-w-container-max mx-auto"><div class="space-y-4"><p class="font-headline-sm text-headline-sm font-bold text-primary">Tiny Paws</p><p class="font-body-md text-body-md text-on-surface-variant">Redefining pet wellness through premium experiences and expert care.</p></div><div class="space-y-4"><p class="font-label-md text-primary font-semibold">Explore</p><nav class="flex flex-col gap-2"><a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-all hover:underline decoration-primary/30" href="#">Shop</a><a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-all hover:underline decoration-primary/30" href="#">Wellness Plans</a><a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-all hover:underline decoration-primary/30" href="#">Specialists</a></nav></div><div class="space-y-4"><p class="font-label-md text-primary font-semibold">Company</p><nav class="flex flex-col gap-2"><a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-all hover:underline decoration-primary/30" href="#">Sitemap</a><a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-all hover:underline decoration-primary/30" href="#">Privacy Policy</a><a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-all hover:underline decoration-primary/30" href="#">Terms of Service</a></nav></div><div class="space-y-4"><p class="font-label-md text-primary font-semibold">Newsletter</p><div class="flex gap-2"><input class="bg-surface rounded-lg border-outline-variant/50 focus:ring-primary focus:border-primary w-full text-sm" placeholder="Email" type="email"><button class="bg-primary text-white p-2 rounded-lg"><span class="material-symbols-outlined">send</span></button></div></div></div><div class="max-w-container-max mx-auto px-gutter pb-8"><p class="font-label-sm text-label-sm text-on-surface-variant text-center md:text-left border-t border-outline-variant/10 pt-8">© 2024 Tiny Paws Premium Pet Care. All rights reserved.</p></div></footer>
+<script>
+        // Simple scroll effect for navbar
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('py-2', 'shadow-md');
+                nav.classList.remove('py-0', 'shadow-sm');
+            } else {
+                nav.classList.remove('py-2', 'shadow-md');
+                nav.classList.add('py-0', 'shadow-sm');
+            }
+        });
+
+        // Micro-interactions for team cards
+        document.querySelectorAll('.group').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                // Potential for adding GSAP or custom animations here
+            });
+        });
+    </script>
+
+
+</body></html>

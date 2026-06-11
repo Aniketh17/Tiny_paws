@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Tiny Paws Premium Store</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-fixed-dim": "#a1d0c8",
+                    "surface-tint": "#396660",
+                    "on-primary": "#ffffff",
+                    "secondary": "#645e50",
+                    "on-primary-fixed-variant": "#204e48",
+                    "primary-container": "#2d5a54",
+                    "surface-container-lowest": "#ffffff",
+                    "on-surface": "#1b1c1c",
+                    "secondary-fixed-dim": "#cec6b5",
+                    "outline-variant": "#c0c8c6",
+                    "on-secondary": "#ffffff",
+                    "outline": "#707977",
+                    "on-surface-variant": "#404847",
+                    "on-error-container": "#93000a",
+                    "inverse-on-surface": "#f3f0ef",
+                    "on-tertiary-container": "#ffb49d",
+                    "on-secondary-fixed-variant": "#4b4639",
+                    "error": "#ba1a1a",
+                    "tertiary-container": "#863c25",
+                    "on-tertiary-fixed-variant": "#77311b",
+                    "error-container": "#ffdad6",
+                    "tertiary-fixed": "#ffdbd0",
+                    "surface-container-highest": "#e4e2e1",
+                    "secondary-fixed": "#eae2d0",
+                    "surface-variant": "#e4e2e1",
+                    "surface-bright": "#fcf9f8",
+                    "inverse-primary": "#a1d0c8",
+                    "on-background": "#1b1c1c",
+                    "surface-container-high": "#eae7e7",
+                    "inverse-surface": "#303030",
+                    "tertiary-fixed-dim": "#ffb59f",
+                    "on-tertiary": "#ffffff",
+                    "on-tertiary-fixed": "#3a0a00",
+                    "primary": "#13423d",
+                    "on-error": "#ffffff",
+                    "secondary-container": "#eae2d0",
+                    "on-primary-fixed": "#00201d",
+                    "background": "#fcf9f8",
+                    "surface": "#fcf9f8",
+                    "surface-container-low": "#f6f3f2",
+                    "on-secondary-container": "#6a6456",
+                    "on-primary-container": "#a1cfc8",
+                    "primary-fixed": "#bcece4",
+                    "on-secondary-fixed": "#1f1b10",
+                    "surface-dim": "#dcd9d9",
+                    "surface-container": "#f0eded",
+                    "tertiary": "#682610"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "stack-md": "24px",
+                    "margin-desktop": "40px",
+                    "stack-sm": "12px",
+                    "margin-mobile": "16px",
+                    "container-max": "1280px",
+                    "stack-lg": "48px",
+                    "base": "8px",
+                    "gutter": "24px"
+            },
+            "fontFamily": {
+                    "display-lg-mobile": ["Playfair Display"],
+                    "label-sm": ["Inter"],
+                    "headline-sm": ["Playfair Display"],
+                    "label-md": ["Inter"],
+                    "body-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "display-lg": ["Playfair Display"],
+                    "headline-md": ["Playfair Display"]
+            },
+            "fontSize": {
+                    "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "500"}],
+                    "headline-sm": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-md": ["32px", {"lineHeight": "40px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(229, 225, 225, 0.5);
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body-md min-h-screen">
+<!-- Top Navigation Bar -->
+<header class="bg-surface/80 dark:bg-surface-dim/80 backdrop-blur-xl docked full-width top-0 sticky z-50 shadow-sm transition-all duration-300">
+<div class="flex justify-between items-center px-gutter py-4 w-full max-w-container-max mx-auto">
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed">Tiny Paws</h1>
+<div class="flex items-center gap-4">
+<button class="p-2 hover:bg-primary-container/10 rounded-lg transition-colors active:scale-95 duration-200">
+<span class="material-symbols-outlined text-primary">search</span>
+</button>
+<button class="p-2 hover:bg-primary-container/10 rounded-lg transition-colors active:scale-95 duration-200 relative">
+<span class="material-symbols-outlined text-primary" data-icon="shopping_cart">shopping_cart</span>
+<span class="absolute top-1 right-1 bg-tertiary text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold">2</span>
+</button>
+</div>
+</div>
+</header>
+<main class="pb-24">
+<!-- Species Toggle -->
+<section class="px-gutter pt-stack-md">
+<div class="bg-surface-container-low p-1 rounded-full flex gap-1">
+<button class="flex-1 py-3 rounded-full flex items-center justify-center gap-2 font-label-md transition-all duration-300 bg-primary text-on-primary shadow-md" id="dog-toggle" onclick="toggleSpecies('dog')">
+<span class="material-symbols-outlined text-lg" data-icon="dog">pets</span>
+                    Dogs
+                </button>
+<button class="flex-1 py-3 rounded-full flex items-center justify-center gap-2 font-label-md transition-all duration-300 text-on-surface-variant hover:bg-surface-container-high" id="cat-toggle" onclick="toggleSpecies('cat')">
+<span class="material-symbols-outlined text-lg" data-icon="cat">pets</span>
+                    Cats
+                </button>
+</div>
+</section>
+<!-- Subcategory Filters (Scrollable) -->
+<section class="mt-stack-md">
+<div class="flex overflow-x-auto hide-scrollbar gap-stack-sm px-gutter py-2 items-center">
+<button class="whitespace-nowrap px-6 py-2 rounded-full font-label-md transition-all border-2 border-primary text-primary bg-primary-fixed/20">
+                    All
+                </button>
+<button class="whitespace-nowrap px-6 py-2 rounded-full font-label-md transition-all text-on-surface-variant bg-surface-container border-2 border-transparent hover:border-outline-variant">
+                    Nutrition
+                </button>
+<button class="whitespace-nowrap px-6 py-2 rounded-full font-label-md transition-all text-on-surface-variant bg-surface-container border-2 border-transparent hover:border-outline-variant">
+                    Toys
+                </button>
+<button class="whitespace-nowrap px-6 py-2 rounded-full font-label-md transition-all text-on-surface-variant bg-surface-container border-2 border-transparent hover:border-outline-variant">
+                    Health
+                </button>
+<button class="whitespace-nowrap px-6 py-2 rounded-full font-label-md transition-all text-on-surface-variant bg-surface-container border-2 border-transparent hover:border-outline-variant">
+                    Grooming
+                </button>
+</div>
+</section>
+<!-- Product Grid -->
+<section class="px-gutter mt-stack-md grid grid-cols-2 gap-4">
+<!-- Product Card 1 -->
+<div class="glass-card rounded-xl overflow-hidden flex flex-col group animate-fade-in">
+<div class="relative aspect-square overflow-hidden bg-surface-container-high">
+<img alt="Premium Dog Kibble" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Close-up photograph of high-quality organic pet food kibble arranged neatly in a minimalist ceramic bowl. The lighting is bright and warm, emphasizing the natural textures and premium quality of the ingredients. The background is a soft-focus clean kitchen setting in shades of cream and sage teal, maintaining a sophisticated and high-end lifestyle aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCeE1WHMcDolceiZWKTMlHvuto3aE4iG0eeAbylDopXEqfgSDnAlbsgn5whTe6ylkIlLhDD5fxWN0pIBzheySdUea3uoLqTrChBBXShHZBfGDXlrNJBSe73cJ8xFao-pUbZ1l6Evj_D8Y22d8ankRWmUivLOTB74RS9CaTYyN2sgmSbVGWD-72W1aQJ64DeNvYzos1beZAqoXBNemfkHwDj3KrmZWhePBvFmTzU0X1vF8-vKk40lJDb1r5XoTpoTbQ1ULGzXf2CRDY"/>
+<span class="absolute top-2 left-2 bg-primary-fixed-dim text-primary text-[10px] px-2 py-1 rounded font-bold">BESTSELLER</span>
+</div>
+<div class="p-3 flex flex-col flex-grow">
+<p class="font-label-sm text-on-surface-variant mb-1">Nutrition</p>
+<h3 class="font-label-md text-on-surface line-clamp-1 mb-2">Artisan Grain-Free Salmon</h3>
+<div class="mt-auto flex items-center justify-between">
+<span class="font-bold text-primary">$24.99</span>
+<button class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-base">add</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="glass-card rounded-xl overflow-hidden flex flex-col group">
+<div class="relative aspect-square overflow-hidden bg-surface-container-high">
+<img alt="Interactive Toy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A beautifully crafted wooden interactive puzzle toy for pets, featuring hidden compartments and smooth natural finishes. The scene is set on a plush cream-colored rug under soft, diffused afternoon sunlight. The overall mood is peaceful and luxurious, emphasizing the blend of high-end home decor with pet-friendly functionality." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxMbfCn9NDEOLy_G03iOAxRxADeSSM21m6nAcpjBTLjAmv3ruBTHfG76hSOwqrm_BaledZ_rtiqBvl75_SWDIAeMI8BJZn5eSoO6baktnX19FQRxeBm5deBEG1wuyTI-GpiXXYZp8bOpF55itoa0DCdz8SrJxcuU9XvglkqdER2ZUmBM6oO3Cf83FMVIy8lt0Sq1xTiiLXe6JJqPR6-dlo-HCPUhnO2W7bC_tsKAeLLFVin11miQ70Bhgoy96IH8oBvX6WC8HmfSs"/>
+</div>
+<div class="p-3 flex flex-col flex-grow">
+<p class="font-label-sm text-on-surface-variant mb-1">Toys</p>
+<h3 class="font-label-md text-on-surface line-clamp-1 mb-2">Sustainable Oak Puzzle</h3>
+<div class="mt-auto flex items-center justify-between">
+<span class="font-bold text-primary">$32.00</span>
+<button class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-base">add</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product Card 3 -->
+<div class="glass-card rounded-xl overflow-hidden flex flex-col group">
+<div class="relative aspect-square overflow-hidden bg-surface-container-high">
+<img alt="Herbal Shampoo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A minimalist aesthetic bottle of premium pet shampoo featuring elegant typography and botanical illustrations. The bottle is placed on a damp marble surface with gentle water ripples and a sprig of fresh lavender. The color palette is composed of soft whites, pale sage, and hints of silver, creating a spa-like clinical yet luxurious atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBF66pGniUJKlUjFNI9EMqwURHEmBOb-WI0sSUfdvyOyZSvIdQ_JQ3j5cAiqMWH8PJWCdaIsL1Zq0wgZ246irGAKpRMpK9L_YTvTCLYZK4sFdq6bCgk6FzQXx-e7gITbUi86q56blQV1QXZiGd1dbmBa0eDlphhjt0Ga6928cBd_aG0aBiBiav88B2PMUDi-fjiqjnI1530NeZb46pOAgq5KzMOxU4iiSY5vLz0qDqa_Y5JaBJ0tEPmwoJIWXLoLUR1O3ABlEoSao4"/>
+<span class="absolute top-2 left-2 bg-tertiary-fixed text-tertiary text-[10px] px-2 py-1 rounded font-bold">NEW</span>
+</div>
+<div class="p-3 flex flex-col flex-grow">
+<p class="font-label-sm text-on-surface-variant mb-1">Grooming</p>
+<h3 class="font-label-md text-on-surface line-clamp-1 mb-2">Lavender Silk Mist</h3>
+<div class="mt-auto flex items-center justify-between">
+<span class="font-bold text-primary">$18.50</span>
+<button class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-base">add</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product Card 4 -->
+<div class="glass-card rounded-xl overflow-hidden flex flex-col group">
+<div class="relative aspect-square overflow-hidden bg-surface-container-high">
+<img alt="Memory Foam Bed" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A high-end, minimalist memory foam pet bed with a textured linen cover in a sophisticated charcoal grey. The bed is situated in a brightly lit, modern living room with hardwood floors and architectural shadows. The image captures the essence of premium comfort and modern interior design, perfectly blending pet needs with luxury aesthetics." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDq2dFQhxqJOhIvDmYQKL96y5J0avFE68oIGhuZVabJ4ABstRbk3LD1gbKQ9qhgJoehiHxyxN2rpEo-d_NLvIVIVu-BnP8kF9uL2mpsStbmnwXDPb_KIbvCeQrHEVhtXyvjJS09L6CcForEs7nCyraiqY3ZY-zBGFbDrcdbhlBsxfh8dWhxx6UlGjt3oDQhO5ut1c4T99IZP86hxDsm7KNhwHCTgt3HWBqszZqvcLg4wy-KUSERlkNBjXF71X1UbDRCryWwsrWlamo"/>
+</div>
+<div class="p-3 flex flex-col flex-grow">
+<p class="font-label-sm text-on-surface-variant mb-1">Health</p>
+<h3 class="font-label-md text-on-surface line-clamp-1 mb-2">Orthopedic Cloud Bed</h3>
+<div class="mt-auto flex items-center justify-between">
+<span class="font-bold text-primary">$120.00</span>
+<button class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-base">add</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Featured Section -->
+<section class="px-gutter mt-stack-lg">
+<div class="relative rounded-2xl h-48 overflow-hidden flex items-center">
+<img alt="Summer Collection" class="absolute inset-0 w-full h-full object-cover" data-alt="An artistic high-angle shot of two happy dogs running through a meadow of tall grass and wildflowers under a warm golden hour sun. The light creates a dreamy flare and highlights the golden tones of the dogs' fur. The mood is joyous, vibrant, and evokes a sense of freedom and premium outdoor pet lifestyle." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0axrAkh0ALShxkH3mSMBvlrSaWWa6u9mpKH9bpkepSCWYEOsl81KeddMEnupqKLPgfiI-6CYnDPCAOxvZtjw47R2EEZtFn_7Y53LnjMMFShNnyXmmu2jJJjpMZwa3VbgR2kLiskRYom84HKKeDLYFMUSxhyFgPBURt7XAdQSv5qHz_ENsWtdxK64xE3NZpgeg0LagEI_hDb7rSFzHF5gBaNb_GdSOLisDWuzWUuJ5UGIPaJYU3n8MHyPHwtIp5AeEmctQvG0ZNdE"/>
+<div class="absolute inset-0 bg-gradient-to-r from-primary/80 to-transparent"></div>
+<div class="relative z-10 px-6 max-w-[60%]">
+<h2 class="font-headline-sm text-headline-sm text-on-primary mb-2">Summer Solstice</h2>
+<p class="font-body-md text-on-primary/90 text-sm mb-4">Limited edition cooling essentials.</p>
+<button class="bg-secondary-container text-on-secondary-container px-4 py-2 rounded-full font-label-md">Shop Now</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 right-0 bg-surface/90 backdrop-blur-xl border-t border-outline-variant/10 z-50 md:hidden">
+<div class="flex justify-around items-center h-16">
+<button class="flex flex-col items-center gap-1 transition-all text-on-surface-variant">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-sm">Home</span>
+</button>
+<button class="flex flex-col items-center gap-1 transition-all text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">storefront</span>
+<span class="font-label-sm font-semibold border-b-2 border-primary">Store</span>
+</button>
+<button class="flex flex-col items-center gap-1 transition-all text-on-surface-variant">
+<span class="material-symbols-outlined">health_and_safety</span>
+<span class="font-label-sm">Services</span>
+</button>
+<button class="flex flex-col items-center gap-1 transition-all text-on-surface-variant">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-sm">Account</span>
+</button>
+</div>
+</nav>
+<!-- Footer (Mobile Simple) -->
+<footer class="bg-surface-container-low px-gutter py-stack-lg border-t border-outline-variant/20 mb-16">
+<div class="flex flex-col gap-6">
+<h4 class="font-headline-sm text-primary">Tiny Paws</h4>
+<div class="grid grid-cols-2 gap-4">
+<a class="font-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="font-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Terms of Service</a>
+<a class="font-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Contact Us</a>
+<a class="font-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Shipping Info</a>
+</div>
+<p class="font-label-sm text-on-surface-variant/70">© 2024 Tiny Paws Premium Pet Care. All rights reserved.</p>
+</div>
+</footer>
+<script>
+        function toggleSpecies(species) {
+            const dogBtn = document.getElementById('dog-toggle');
+            const catBtn = document.getElementById('cat-toggle');
+            
+            if (species === 'dog') {
+                dogBtn.classList.add('bg-primary', 'text-on-primary', 'shadow-md');
+                dogBtn.classList.remove('text-on-surface-variant', 'hover:bg-surface-container-high');
+                catBtn.classList.remove('bg-primary', 'text-on-primary', 'shadow-md');
+                catBtn.classList.add('text-on-surface-variant', 'hover:bg-surface-container-high');
+            } else {
+                catBtn.classList.add('bg-primary', 'text-on-primary', 'shadow-md');
+                catBtn.classList.remove('text-on-surface-variant', 'hover:bg-surface-container-high');
+                dogBtn.classList.remove('bg-primary', 'text-on-primary', 'shadow-md');
+                dogBtn.classList.add('text-on-surface-variant', 'hover:bg-surface-container-high');
+            }
+        }
+
+        // Simple Fade-in animation on scroll
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    entry.target.classList.remove('opacity-0', 'translate-y-4');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.glass-card').forEach(card => {
+            card.classList.add('opacity-0', 'translate-y-4', 'transition-all', 'duration-500');
+            observer.observe(card);
+        });
+    </script>
+</body></html>

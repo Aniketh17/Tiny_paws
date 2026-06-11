@@ -1076,7 +1076,7 @@ footer {
   flex: 1;
   position: sticky;
   top: 112px;
-  height: 600px;
+  height: fit-content;
 }
 
 .providers-list-grid {

@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import Navbar from './components/Navbar';
 import CartOverlay from './components/CartOverlay';
 import Footer from './components/Footer';
+import ScrollToTop from './components/ScrollToTop';
 
 import Home from './pages/Home';
 import Store from './pages/Store';
@@ -32,6 +33,7 @@ function App() {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100dvh' }}>
+      <ScrollToTop />
       {showNavbar && <Navbar onOpenCart={() => setIsCartOpen(true)} />}
       <CartOverlay isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
 
